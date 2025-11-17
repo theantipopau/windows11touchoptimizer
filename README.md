@@ -28,8 +28,8 @@ A menu-driven Windows batch utility that prunes bloatware, tones down telemetry,
 You can also launch it from an elevated terminal:
 
 ```bat
-cd /d C:\Windows Debloat
-start "" /wait powershell -Verb runAs .\surface_go_touch_optimizer.bat
+cd /d C:\Windows Optimiser
+start "" /wait powershell -Verb runAs .\windows_11_touch_optimizer.bat
 ```
 
 ## Menu reference
