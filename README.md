@@ -21,9 +21,15 @@ A menu-driven Windows batch utility that prunes bloatware, tones down telemetry,
 
 ## Quick start
 1. Copy the repository folder somewhere local (e.g., `C:\Windows Debloat`).
-2. Double-click `surface_go_touch_optimizer.bat` (or right-click and choose **Run as administrator**). A double-click shows a "Requesting administrator approval" message, triggers UAC, and pauses until you confirm; once approved, a fresh elevated `cmd` window launches in the script folder and stays open on the optimizer menu.
+2. Double-click `windows_11_touch_optimizer.bat` (or right-click and choose **Run as administrator**). A double-click shows a "Requesting administrator approval" message, triggers UAC, and pauses until you confirm; once approved, a fresh elevated `cmd` window launches in the script folder and stays open on the optimizer menu.
 3. From the menu, select `[1]` (or press `F`) to run **FULL OPTIMIZATION** for Surface Go 2, or `[2]` (press `R`) for the conservative recommended flow, or pick individual steps.
 4. Reboot after the script finishes so policy changes fully apply.
+
+### Command-line shortcuts
+- `/full` or `/recommended` run those flows without showing the menu.
+- `/dry-run` prints the actions (and logs them) without making changes.
+- `/no-restore` skips creating a restore point; `/skip-wu-cache` skips purging Windows Update downloads.
+- `/revert:<telemetry|background|animations|startup|widgets|all>` re-enables a specific area without opening the menu.
 
 You can also launch it from an elevated terminal:
 
@@ -45,10 +51,11 @@ start "" /wait powershell -Verb runAs .\windows_11_touch_optimizer.bat
 - `[A]` Disable Widgets + Teams Chat (also hides the Copilot button) for a distraction-free taskbar.
 - `[B]` Disable animations + visual effects: turns off taskbar animations, window animations, Aero Peek, and other visual effects for maximum touch responsiveness on low-spec hardware.
 - `[C]` Optimise startup programs: disables fast startup (for cleaner boots), removes startup delays, and disables non-essential startup tasks.
+- `[V]` Revert changes: choose to restore telemetry, background/search services, animations/touch typing defaults, startup tasks/features, widgets/chat, or all at once.
 - `[X]` **RESTORE**: Launches Windows System Restore to undo changes if something breaks. Look for restore points named "SurfaceGoTouchOptimizer".
 
 ## Customizing the app list
-Edit the `:RemoveConsumerApps` label inside `surface_go_touch_optimizer.bat` to add or remove package names. Use the exact `Get-AppxPackage` `Name` (for example `Microsoft.Todos`), one per line. The helper already removes both the installed app and the provisioned image so Store updates do not reinstall it.
+Edit the `:RemoveConsumerApps` label inside `windows_11_touch_optimizer.bat` to add or remove package names. Use the exact `Get-AppxPackage` `Name` (for example `Microsoft.Todos`), one per line. The helper already removes both the installed app and the provisioned image so Store updates do not reinstall it.
 
 ## Rollback and safeguards
 - A restore point is attempted at the beginning of the recommended flow. If System Protection is disabled, enable it and rerun option `[1]` to capture a snapshot.
